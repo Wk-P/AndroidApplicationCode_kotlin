@@ -17,8 +17,12 @@ class MyAccount constructor() {
         dep = readLine().toString().toInt()
         remaining += dep
         println("${dep} 원을 입금히였다.진액: ${remaining}")
+        if (dep == 0) {
+            println("신용등급이: ${level.toString()} -> ${level.toString()}")
+            return
+        }
         if (remaining >= 0) {
-            println("신용등급이: ${level.toString()} -> ${accountlevels[level.ordinal + 1].toString()}로 한단계 상승합니다.")
+            println("신용등급이: ${level.toString()} -> ${accountlevels[level.ordinal - 1].toString()}로 한단계 상승합니다.")
             upGrade()
         }
         if (remaining >= 0 && level == levels.E) {
@@ -34,6 +38,11 @@ class MyAccount constructor() {
             println("출금하실 금액을 말하세요.")
             with = readLine().toString().toInt()
             remaining -= with
+            if (with == 0) {
+                println("${with} 원을 출급히였다.진액: ${remaining}.")
+                println("신용등급이: ${level.toString()} -> ${level.toString()}")
+                return
+            }
             if (remaining >= -1000 && remaining < 0) {
                 println("${with} 원을 출급히였다.진액: ${remaining}.")
                 println("신용등급이: ${level.toString()} -> ${accountlevels[level.ordinal + 1].toString()}로 한단계 상승합니다.")
